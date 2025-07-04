@@ -12,8 +12,10 @@
 - ⚡ Interesting fact:  My former clients extended an invitation for me to join them at their onsite office in Amsterdam, Netherlands. So I traveled from Mumbai to Amsterdam to further enhance my skills and collaborate directly with clients, not only strengthening client relationships but also gaining invaluable hands-on experience working in a dynamic international environment. 
  🌍✈️
 
-Let's connect and explore opportunities to drive innovation and solve challenges together!
+## 📈 My GitHub Stats  
+<img src="https://github-readme-streak-stats.herokuapp.com/?user=panditpooja&show_icons=true&theme=dark"/>
 
+Let's connect and explore opportunities to **drive innovation** and **solve meaningful challenges together**!
 
 <!---
 panditpooja/panditpooja is a ✨ special ✨ repository because its `README.md` (this file) appears on your GitHub profile.
