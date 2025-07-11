@@ -111,6 +111,7 @@ while year_start <= today:
     year_start = year_end + datetime.timedelta(days=1)
 
 print(f"✅ Total Contributions: {total_contributions}")
+print(f"📅 Today (local system date): {today}")
 
 # -------------------------------
 # CALCULATE STREAKS
@@ -134,40 +135,32 @@ for day in all_days:
         temp_streak = 0
         last_date = None
 
-# -------------------------------
-# DEBUG: Check API vs Today
-# -------------------------------
+# Force streak alive if contributions increased
 most_recent_contribution = max(
     (d for d in all_days if d["count"] > 0),
     key=lambda d: d["date"],
     default=None
 )
 
-print(f"📅 Today (local system date): {today}")
-if most_recent_contribution:
-    print(f"📅 Most recent contribution date from API: {most_recent_contribution['date']}")
-    delta_days = (today - most_recent_contribution["date"]).days
-    print(f"🕑 Delta days between today and API: {delta_days}")
-    print(f"🔄 Temp streak before forcing logic: {temp_streak}")
-else:
-    print("⚠️ No contributions found in history (most_recent_contribution is None).")
+print(f"📅 Most recent contribution date from API: {most_recent_contribution['date'] if most_recent_contribution else 'None'}")
+delta_days = (today - most_recent_contribution["date"]).days if most_recent_contribution else None
+print(f"🔢 Delta days between today and API: {delta_days}")
 
-# -------------------------------
-# FORCE TODAY ALIVE IF API LAGS
-# -------------------------------
-if most_recent_contribution:
-    delta_days = (today - most_recent_contribution["date"]).days
-    if delta_days == 0:
-        # API shows contributions today
-        current_streak = temp_streak
-    elif delta_days == 1:
+if delta_days == 0:
+    print("✅ Contributions made today. Streak alive.")
+    current_streak = temp_streak
+elif delta_days == 1:
+    print("⚠️ Contributions made yesterday. Keeping streak alive.")
+    current_streak = temp_streak
+else:
+    print("⏳ API may not be up to date. Forcing streak alive as fallback...")
+    if temp_streak > 0:
         current_streak = temp_streak
     else:
-        # If API stale but we know contributions increased, assume streak continues
-        print("⚠️ Forcing streak alive due to API lag...")
-        current_streak = temp_streak + 1
-else:
-    current_streak = 0
+        current_streak = 0
+
+print(f"🔥 Current Streak: {current_streak}")
+print(f"🏆 Longest Streak: {longest_streak}")
 
 # -------------------------------
 # CREATE SVG
@@ -195,7 +188,7 @@ dwg.add(dwg.text("Total Contributions", insert=(116, 150), fill="#ffffff",
 dwg.add(dwg.text(f"{account_created_at.strftime('%b %d, %Y')} - Present",
                  insert=(116, 180), fill="#999999", font_size="12px", text_anchor="middle"))
 
-# Current Streak Panel (spacing adjusted)
+# Current Streak Panel
 dwg.add(dwg.circle(center=(350, 110), r=40, stroke="#ff9800", stroke_width=5, fill="none"))
 dwg.add(dwg.text(str(current_streak), insert=(350, 125), fill="#ffffff",
                  font_size="28px", font_weight="bold", text_anchor="middle"))
