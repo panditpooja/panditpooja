@@ -21,6 +21,7 @@ headers = {"Authorization": f"Bearer {TOKEN}"}
 query = """
 {
   user(login: "%s") {
+    createdAt
     contributionsCollection {
       contributionCalendar {
         totalContributions
@@ -31,7 +32,6 @@ query = """
           }
         }
       }
-      createdAt
     }
   }
 }
