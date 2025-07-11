@@ -52,6 +52,7 @@ for week in data['data']['user']['contributionsCollection']['contributionCalenda
 total_contributions = sum(day["count"] for day in all_days)
 current_streak, longest_streak, temp_streak = 0, 0, 0
 last_date = None
+start_date, end_date = None, None
 
 for day in all_days:
     if day["count"] > 0:
@@ -59,8 +60,10 @@ for day in all_days:
             temp_streak += 1
         else:
             temp_streak = 1
+            start_date = day["date"]
         if temp_streak > longest_streak:
             longest_streak = temp_streak
+        end_date = day["date"]
         last_date = day["date"]
     else:
         temp_streak = 0
@@ -68,13 +71,33 @@ for day in all_days:
 if temp_streak > 0:
     current_streak = temp_streak
 
-# Create SVG
+# Create fancy SVG
 dwg = svgwrite.Drawing("assets/github-stats.svg", size=("600px", "200px"))
-dwg.add(dwg.rect(insert=(0, 0), size=("100%", "100%"), fill="#0d1117"))
-dwg.add(dwg.text("🔥 GitHub Stats", insert=(20, 40), fill="white", font_size="24px", font_family="Arial"))
-dwg.add(dwg.text(f"Total Contributions: {total_contributions}", insert=(20, 80), fill="white", font_size="18px"))
-dwg.add(dwg.text(f"Current Streak: {current_streak}", insert=(20, 110), fill="white", font_size="18px"))
-dwg.add(dwg.text(f"Longest Streak: {longest_streak}", insert=(20, 140), fill="white", font_size="18px"))
-dwg.save()
 
-print("✅ GitHub Stats SVG updated.")
+# Background panel
+dwg.add(dwg.rect(insert=(0, 0), size=("100%", "100%"), rx=15, ry=15, fill="#0d1117", stroke="#333", stroke_width=2))
+
+# Sections divider lines
+dwg.add(dwg.line(start=(200, 20), end=(200, 180), stroke="#444", stroke_width=2))
+dwg.add(dwg.line(start=(400, 20), end=(400, 180), stroke="#444", stroke_width=2))
+
+# Total Contributions
+dwg.add(dwg.text(str(total_contributions), insert=(100, 80), fill="#ffffff", font_size="36px", font_weight="bold", text_anchor="middle"))
+dwg.add(dwg.text("Total Contributions", insert=(100, 115), fill="#ffffff", font_size="14px", text_anchor="middle"))
+dwg.add(dwg.text(f"{all_days[0]['date'].strftime('%b %d, %Y')} - Present", insert=(100, 145), fill="#999999", font_size="12px", text_anchor="middle"))
+
+# Current Streak
+dwg.add(dwg.circle(center=(300, 70), r=35, stroke="#ff9800", stroke_width=5, fill="none"))
+dwg.add(dwg.text(str(current_streak), insert=(300, 80), fill="#ffffff", font_size="28px", font_weight="bold", text_anchor="middle"))
+dwg.add(dwg.text("Current Streak", insert=(300, 115), fill="#ff9800", font_size="14px", font_weight="bold", text_anchor="middle"))
+if start_date and end_date:
+    streak_range = f"{start_date.strftime('%b %d')} - {end_date.strftime('%b %d')}"
+    dwg.add(dwg.text(streak_range, insert=(300, 145), fill="#999999", font_size="12px", text_anchor="middle"))
+
+# Longest Streak
+dwg.add(dwg.text(str(longest_streak), insert=(500, 80), fill="#ffffff", font_size="36px", font_weight="bold", text_anchor="middle"))
+dwg.add(dwg.text("Longest Streak", insert=(500, 115), fill="#ffffff", font_size="14px", text_anchor="middle"))
+dwg.add(dwg.text(streak_range, insert=(500, 145), fill="#999999", font_size="12px", text_anchor="middle"))
+
+dwg.save()
+print("✅ Fancy GitHub Stats SVG updated.")
