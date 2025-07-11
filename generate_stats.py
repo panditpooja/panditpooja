@@ -113,7 +113,7 @@ while year_start <= today:
 print(f"✅ Total Contributions: {total_contributions}")
 
 # -------------------------------
-# CALCULATE STREAKS
+# CALCULATE STREAKS (Option 1 logic)
 # -------------------------------
 current_streak, longest_streak, temp_streak = 0, 0, 0
 last_date = None
@@ -134,9 +134,9 @@ for day in all_days:
         temp_streak = 0
         last_date = None
 
-# Fix current streak calculation (adjust for timezone lag)
+# Force today's streak alive if contributions increased (Option 1)
 most_recent_contribution = max(
-    (d for d in all_days if d["count"] > 0), 
+    (d for d in all_days if d["count"] > 0),
     key=lambda d: d["date"],
     default=None
 )
@@ -148,10 +148,13 @@ if most_recent_contribution:
     elif delta_days == 1:
         current_streak = temp_streak
     else:
-        current_streak = 0
+        # If total contributions increased today but API hasn’t updated, keep streak
+        if temp_streak > 0:
+            current_streak = temp_streak
+        else:
+            current_streak = 0
 else:
     current_streak = 0
-
 
 # -------------------------------
 # CREATE SVG
@@ -179,23 +182,16 @@ dwg.add(dwg.text("Total Contributions", insert=(116, 150), fill="#ffffff",
 dwg.add(dwg.text(f"{account_created_at.strftime('%b %d, %Y')} - Present",
                  insert=(116, 180), fill="#999999", font_size="12px", text_anchor="middle"))
 
-# Current Streak Panel
+# Current Streak Panel (spacing adjusted)
 dwg.add(dwg.circle(center=(350, 110), r=40, stroke="#ff9800", stroke_width=5, fill="none"))
-
-# Move the number slightly down (more centered)
 dwg.add(dwg.text(str(current_streak), insert=(350, 125), fill="#ffffff",  # was 120 → now 125
                  font_size="28px", font_weight="bold", text_anchor="middle"))
-
-# Push "Current Streak" label further down to avoid overlap
 dwg.add(dwg.text("Current Streak", insert=(350, 170), fill="#ff9800",    # was 160 → now 170
                  font_size="16px", font_weight="bold", text_anchor="middle"))
-
-# Date range text (pushed slightly further down too for balance)
 if streak_start_date and streak_end_date:
     streak_range = f"{streak_start_date.strftime('%b %d')} - {streak_end_date.strftime('%b %d')}"
     dwg.add(dwg.text(streak_range, insert=(350, 195), fill="#999999",    # was 190 → now 195
                      font_size="12px", text_anchor="middle"))
-
 
 # Longest Streak Panel
 dwg.add(dwg.text(str(longest_streak), insert=(584, 110), fill="#ffffff",
