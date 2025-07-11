@@ -116,59 +116,70 @@ print(f"📅 Today (local system date): {today}")
 # -------------------------------
 # CALCULATE STREAKS
 # -------------------------------
-current_streak, longest_streak, temp_streak = 0, 0, 0
-last_date = None
-streak_start_date, streak_end_date = None, None
+current_streak, longest_streak = 0, 0
+current_streak_start, current_streak_end = None, None
+longest_streak_start, longest_streak_end = None, None
 
-for day in all_days:
+all_days.sort(key=lambda d: d["date"])  # Ensure days are sorted
+
+temp_streak = 0
+temp_start_date = None
+
+for i, day in enumerate(all_days):
     if day["count"] > 0:
-        if last_date and (day["date"] - last_date).days == 1:
-            temp_streak += 1
-        else:
-            temp_streak = 1
-            streak_start_date = day["date"]
+        if temp_streak == 0:
+            temp_start_date = day["date"]
+        temp_streak += 1
+
+        # Update longest streak if needed
         if temp_streak > longest_streak:
             longest_streak = temp_streak
-        streak_end_date = day["date"]
-        last_date = day["date"]
+            longest_streak_start = temp_start_date
+            longest_streak_end = day["date"]
     else:
         temp_streak = 0
-        last_date = None
+        temp_start_date = None
 
-# -------------------------------
-# FORCE STREAK ALIVE IF NEEDED
-# -------------------------------
-most_recent_contribution = max(
-    (d for d in all_days if d["count"] > 0),
-    key=lambda d: d["date"],
-    default=None
-)
+# Determine current streak
+most_recent_day = all_days[-1]
+if most_recent_day["count"] > 0:
+    # Contributions today
+    current_streak = 1
+    current_streak_start = most_recent_day["date"]
+    current_streak_end = most_recent_day["date"]
 
-delta_days = (today - most_recent_contribution["date"]).days if most_recent_contribution else None
-print(f"📅 Most recent contribution: {most_recent_contribution['date'] if most_recent_contribution else 'None'}")
-print(f"📆 Delta days: {delta_days}")
+    # Walk backwards to find the start of the streak
+    for day in reversed(all_days[:-1]):
+        if (current_streak_start - day["date"]).days == 1 and day["count"] > 0:
+            current_streak += 1
+            current_streak_start = day["date"]
+        else:
+            break
+elif (today - all_days[-1]["date"]).days == 1 and all_days[-1]["count"] > 0:
+    # Contributions yesterday, continue streak
+    current_streak = 1
+    current_streak_start = all_days[-1]["date"]
+    current_streak_end = all_days[-1]["date"]
 
-if delta_days == 0:
-    print("✅ Contributions made today. Streak alive.")
-    current_streak = temp_streak
-elif delta_days == 1:
-    print("⚠️ Contributions made yesterday. Forcing streak alive.")
-    if temp_streak > 0:
-        current_streak = temp_streak + 1
-        streak_end_date = today  # ✅ Extend end date
-        # 🚨 DO NOT reset streak_start_date
-    else:
-        # Rare: first contribution today
-        current_streak = 1
-        streak_start_date = today
-        streak_end_date = today
+    # Walk backwards
+    for day in reversed(all_days[:-1]):
+        if (current_streak_start - day["date"]).days == 1 and day["count"] > 0:
+            current_streak += 1
+            current_streak_start = day["date"]
+        else:
+            break
 else:
-    print("⏳ API may not be up to date. No forcing.")
+    # No contributions today or yesterday
     current_streak = 0
+    current_streak_start = None
+    current_streak_end = None
 
 print(f"🔥 Current Streak: {current_streak}")
+if current_streak_start and current_streak_end:
+    print(f"📆 Current Streak Range: {current_streak_start} - {current_streak_end}")
 print(f"🏆 Longest Streak: {longest_streak}")
-print(f"📆 Streak Range: {streak_start_date} - {streak_end_date}")
+if longest_streak_start and longest_streak_end:
+    print(f"📆 Longest Streak Range: {longest_streak_start} - {longest_streak_end}")
 
 # -------------------------------
 # CREATE SVG
@@ -202,17 +213,23 @@ dwg.add(dwg.text(str(current_streak), insert=(350, 125), fill="#ffffff",
                  font_size="28px", font_weight="bold", text_anchor="middle"))
 dwg.add(dwg.text("Current Streak", insert=(350, 170), fill="#ff9800",
                  font_size="16px", font_weight="bold", text_anchor="middle"))
-if streak_start_date and streak_end_date:
-    streak_range = f"{streak_start_date.strftime('%b %d')} - {streak_end_date.strftime('%b %d')}"
-    dwg.add(dwg.text(streak_range, insert=(350, 195), fill="#999999",
-                     font_size="12px", text_anchor="middle"))
+if current_streak_start and current_streak_end:
+    streak_range = f"{current_streak_start.strftime('%b %d')} - {current_streak_end.strftime('%b %d')}"
+else:
+    streak_range = "No streak"
+dwg.add(dwg.text(streak_range, insert=(350, 195), fill="#999999",
+                 font_size="12px", text_anchor="middle"))
 
 # Longest Streak Panel
 dwg.add(dwg.text(str(longest_streak), insert=(584, 110), fill="#ffffff",
                  font_size="40px", font_weight="bold", text_anchor="middle"))
 dwg.add(dwg.text("Longest Streak", insert=(584, 150), fill="#ffffff",
                  font_size="16px", text_anchor="middle"))
-dwg.add(dwg.text(streak_range, insert=(584, 180), fill="#999999",
+if longest_streak_start and longest_streak_end:
+    longest_range = f"{longest_streak_start.strftime('%b %d')} - {longest_streak_end.strftime('%b %d')}"
+else:
+    longest_range = "N/A"
+dwg.add(dwg.text(longest_range, insert=(584, 180), fill="#999999",
                  font_size="12px", text_anchor="middle"))
 
 dwg.save()
