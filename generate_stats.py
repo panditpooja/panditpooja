@@ -114,7 +114,7 @@ print(f"✅ Total Contributions: {total_contributions}")
 print(f"📅 Today (local system date): {today}")
 
 # -------------------------------
-# CALCULATE STREAKS (with smarter forcing)
+# CALCULATE STREAKS (smarter forcing)
 # -------------------------------
 current_streak, longest_streak, temp_streak = 0, 0, 0
 last_date = None
@@ -147,16 +147,17 @@ print(f"📅 Most recent contribution: {most_recent_contribution['date'] if most
 print(f"📆 Delta days: {delta_days}")
 
 if delta_days == 0:
-    # API says contributions today, use normally
+    # Contributions today
     print("✅ Contributions made today. Streak alive.")
     current_streak = temp_streak
 elif delta_days == 1:
-    # API is probably delayed; assume streak is alive
+    # API is delayed: extend streak
     print("⚠️ Contributions made yesterday. Forcing streak alive.")
     if temp_streak > 0:
         current_streak = temp_streak + 1
-        streak_end_date = today  # 🆕 Force end date to today
+        streak_end_date = today  # ✅ Extend streak end date
     else:
+        # Rare: first contribution today
         current_streak = 1
         streak_start_date = today
         streak_end_date = today
