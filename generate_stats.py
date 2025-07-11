@@ -113,7 +113,7 @@ while year_start <= today:
 print(f"✅ Total Contributions: {total_contributions}")
 
 # -------------------------------
-# CALCULATE STREAKS (updated logic)
+# CALCULATE STREAKS
 # -------------------------------
 current_streak, longest_streak, temp_streak = 0, 0, 0
 last_date = None
@@ -134,16 +134,24 @@ for day in all_days:
         temp_streak = 0
         last_date = None
 
-# Fix current streak calculation to include today or yesterday
-today_contributions = next((d for d in all_days if d["date"] == today), None)
-yesterday_contributions = next((d for d in all_days if d["date"] == (today - datetime.timedelta(days=1))), None)
+# Fix current streak calculation (adjust for timezone lag)
+most_recent_contribution = max(
+    (d for d in all_days if d["count"] > 0), 
+    key=lambda d: d["date"],
+    default=None
+)
 
-if today_contributions and today_contributions["count"] > 0:
-    current_streak = temp_streak
-elif yesterday_contributions and yesterday_contributions["count"] > 0:
-    current_streak = temp_streak
+if most_recent_contribution:
+    delta_days = (today - most_recent_contribution["date"]).days
+    if delta_days == 0:
+        current_streak = temp_streak
+    elif delta_days == 1:
+        current_streak = temp_streak
+    else:
+        current_streak = 0
 else:
     current_streak = 0
+
 
 # -------------------------------
 # CREATE SVG
