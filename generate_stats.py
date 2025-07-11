@@ -125,6 +125,7 @@ all_days.sort(key=lambda d: d["date"])  # Ensure days are sorted
 temp_streak = 0
 temp_start_date = None
 
+# Find longest streak
 for i, day in enumerate(all_days):
     if day["count"] > 0:
         if temp_streak == 0:
@@ -140,43 +141,33 @@ for i, day in enumerate(all_days):
         temp_streak = 0
         temp_start_date = None
 
-# Determine current streak
-most_recent_day = all_days[-1]
-if most_recent_day["count"] > 0:
-    # Contributions today
-    current_streak = 1
-    current_streak_start = most_recent_day["date"]
-    current_streak_end = most_recent_day["date"]
-
-    # Walk backwards to find the start of the streak
-    for day in reversed(all_days[:-1]):
-        if (current_streak_start - day["date"]).days == 1 and day["count"] > 0:
-            current_streak += 1
+# Find most recent streak (even if inactive)
+for i in reversed(range(len(all_days))):
+    day = all_days[i]
+    if day["count"] > 0:
+        if current_streak == 0:
+            current_streak_end = day["date"]
             current_streak_start = day["date"]
+            current_streak = 1
         else:
+            # Check if streak is continuous
+            if (current_streak_start - day["date"]).days == 1:
+                current_streak_start = day["date"]
+                current_streak += 1
+            else:
+                break
+    else:
+        if current_streak > 0:
             break
-elif (today - all_days[-1]["date"]).days == 1 and all_days[-1]["count"] > 0:
-    # Contributions yesterday, continue streak
-    current_streak = 1
-    current_streak_start = all_days[-1]["date"]
-    current_streak_end = all_days[-1]["date"]
 
-    # Walk backwards
-    for day in reversed(all_days[:-1]):
-        if (current_streak_start - day["date"]).days == 1 and day["count"] > 0:
-            current_streak += 1
-            current_streak_start = day["date"]
-        else:
-            break
-else:
-    # No contributions today or yesterday
-    current_streak = 0
-    current_streak_start = None
-    current_streak_end = None
+# Mark inactive if no contribution today
+streak_active = (current_streak_end == today)
 
 print(f"🔥 Current Streak: {current_streak}")
 if current_streak_start and current_streak_end:
     print(f"📆 Current Streak Range: {current_streak_start} - {current_streak_end}")
+    if not streak_active:
+        print("⚠️ Current streak is inactive.")
 print(f"🏆 Longest Streak: {longest_streak}")
 if longest_streak_start and longest_streak_end:
     print(f"📆 Longest Streak Range: {longest_streak_start} - {longest_streak_end}")
@@ -215,6 +206,8 @@ dwg.add(dwg.text("Current Streak", insert=(350, 170), fill="#ff9800",
                  font_size="16px", font_weight="bold", text_anchor="middle"))
 if current_streak_start and current_streak_end:
     streak_range = f"{current_streak_start.strftime('%b %d')} - {current_streak_end.strftime('%b %d')}"
+    if not streak_active:
+        streak_range += " (inactive)"
 else:
     streak_range = "No streak"
 dwg.add(dwg.text(streak_range, insert=(350, 195), fill="#999999",
