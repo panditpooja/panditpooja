@@ -143,21 +143,30 @@ most_recent_contribution = max(
 )
 
 delta_days = (today - most_recent_contribution["date"]).days if most_recent_contribution else None
-print(f"📅 Most recent contribution date from API: {most_recent_contribution['date'] if most_recent_contribution else 'None'}")
-print(f"🔢 Delta days between today and API: {delta_days}")
+print(f"📅 Most recent contribution: {most_recent_contribution['date'] if most_recent_contribution else 'None'}")
+print(f"📆 Delta days: {delta_days}")
 
 if delta_days == 0:
+    # API says contributions today, use normally
     print("✅ Contributions made today. Streak alive.")
     current_streak = temp_streak
 elif delta_days == 1:
+    # API is probably delayed; assume streak is alive
     print("⚠️ Contributions made yesterday. Forcing streak alive.")
-    current_streak = temp_streak + 1 if temp_streak > 0 else 1
+    if temp_streak > 0:
+        current_streak = temp_streak + 1
+        streak_end_date = today  # 🆕 Force end date to today
+    else:
+        current_streak = 1
+        streak_start_date = today
+        streak_end_date = today
 else:
-    print("⏳ API may not be up to date. No recent streak.")
+    print("⏳ API may not be up to date. Not forcing streak.")
     current_streak = 0
 
 print(f"🔥 Current Streak: {current_streak}")
 print(f"🏆 Longest Streak: {longest_streak}")
+print(f"📆 Streak Range: {streak_start_date} - {streak_end_date}")
 
 # -------------------------------
 # CREATE SVG
@@ -185,7 +194,7 @@ dwg.add(dwg.text("Total Contributions", insert=(116, 150), fill="#ffffff",
 dwg.add(dwg.text(f"{account_created_at.strftime('%b %d, %Y')} - Present",
                  insert=(116, 180), fill="#999999", font_size="12px", text_anchor="middle"))
 
-# Current Streak Panel (spacing adjusted)
+# Current Streak Panel
 dwg.add(dwg.circle(center=(350, 110), r=40, stroke="#ff9800", stroke_width=5, fill="none"))
 dwg.add(dwg.text(str(current_streak), insert=(350, 125), fill="#ffffff",
                  font_size="28px", font_weight="bold", text_anchor="middle"))
