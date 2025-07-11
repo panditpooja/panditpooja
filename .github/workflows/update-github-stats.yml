@@ -40,6 +40,7 @@ jobs:
           ssh-keyscan github.com >> ~/.ssh/known_hosts
           git config user.name "GitHub Actions"
           git config user.email "actions@github.com"
+          git remote set-url origin git@github.com:${{ github.repository }}
           git add assets/github-stats.svg
           git commit -m "Update GitHub stats [skip ci]" || echo "No changes to commit"
           git push origin main
