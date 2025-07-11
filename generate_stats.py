@@ -113,7 +113,7 @@ while year_start <= today:
 print(f"✅ Total Contributions: {total_contributions}")
 
 # -------------------------------
-# CALCULATE STREAKS
+# CALCULATE STREAKS 
 # -------------------------------
 current_streak, longest_streak, temp_streak = 0, 0, 0
 last_date = None
@@ -132,9 +132,13 @@ for day in all_days:
         last_date = day["date"]
     else:
         temp_streak = 0
+        last_date = None
 
-if temp_streak > 0:
+# Determine current streak
+if all_days[-1]["count"] > 0 or (today - all_days[-1]["date"]).days == 1:
     current_streak = temp_streak
+else:
+    current_streak = 0
 
 # -------------------------------
 # CREATE SVG
@@ -163,7 +167,7 @@ dwg.add(dwg.text(f"{account_created_at.strftime('%b %d, %Y')} - Present",
                  insert=(116, 180), fill="#999999", font_size="12px", text_anchor="middle"))
 
 # Current Streak Panel
-dwg.add(dwg.circle(center=(350, 110), r=40, stroke="#ff9800", stroke_width=5, fill="none"))
+dwg.add(dwg.circle(center=(350, 110), r=40, stroke="#ff9800", stroke_width=3, fill="none"))
 dwg.add(dwg.text(str(current_streak), insert=(350, 120), fill="#ffffff",
                  font_size="28px", font_weight="bold", text_anchor="middle"))
 dwg.add(dwg.text("Current Streak", insert=(350, 160), fill="#ff9800",
