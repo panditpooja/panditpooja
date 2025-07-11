@@ -35,12 +35,13 @@
 ---
 
 <div align="center">
-<img src="https://github.com/panditpooja/panditpooja/blob/main/assets/github-stats.svg">
+<img src="https://github-readme-streak-stats.herokuapp.com/?user=panditpooja&show_icons=true&theme=dark"/>
 </div>
 
 Let's connect and explore opportunities to **drive innovation** and **solve meaningful challenges together**!
 
 <!---
+<img src="https://github.com/panditpooja/panditpooja/blob/main/assets/github-stats.svg">
 panditpooja/panditpooja is a ✨ special ✨ repository because its `README.md` (this file) appears on your GitHub profile.
 You can click the Preview link to take a look at your changes.
 --->
