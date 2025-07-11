@@ -3,13 +3,21 @@ import datetime
 import svgwrite
 import os
 
-# GitHub username and token from secret
-USERNAME = "panditpooja"
-TOKEN = os.environ["GH_TOKEN"]
+# -------------------------------
+# CONFIGURATION
+# -------------------------------
+USERNAME = "panditpooja"  # your GitHub username
+TOKEN = os.environ.get("GH_TOKEN")  # Token from GitHub Actions secret
+
+if not TOKEN:
+    print("❌ ERROR: GH_TOKEN is not set as an environment variable.")
+    exit(1)
 
 headers = {"Authorization": f"Bearer {TOKEN}"}
 
-# GraphQL query for all-time contributions
+# -------------------------------
+# FETCH GITHUB CONTRIBUTIONS
+# -------------------------------
 query = """
 {
   user(login: "%s") {
@@ -29,32 +37,53 @@ query = """
 }
 """ % USERNAME
 
-# Fetch data
+print("📡 Fetching GitHub contribution data...")
 response = requests.post(
     "https://api.github.com/graphql",
     json={"query": query},
     headers=headers
 )
 
+# -------------------------------
+# DEBUGGING API RESPONSE
+# -------------------------------
 if response.status_code != 200:
-    raise Exception(f"GitHub API Error: {response.status_code} {response.text}")
+    print("❌ GitHub API Error")
+    print(f"Status Code: {response.status_code}")
+    print(f"Response: {response.text}")
+    exit(1)
 
-data = response.json()
+json_response = response.json()
+if "errors" in json_response:
+    print("❌ GraphQL Error")
+    print(json_response["errors"])
+    exit(1)
 
-# Get total contributions and account creation date
-total_contributions = data['data']['user']['contributionsCollection']['totalContributions']
-account_created_at = datetime.datetime.strptime(data['data']['user']['createdAt'], "%Y-%m-%dT%H:%M:%SZ").date()
+# -------------------------------
+# PARSE RESPONSE
+# -------------------------------
+try:
+    user_data = json_response["data"]["user"]
+    total_contributions = user_data["contributionsCollection"]["contributionCalendar"]["totalContributions"]
+    account_created_at = datetime.datetime.strptime(user_data["createdAt"], "%Y-%m-%dT%H:%M:%SZ").date()
+    weeks = user_data["contributionsCollection"]["contributionCalendar"]["weeks"]
+except KeyError as e:
+    print(f"❌ KeyError: {e}")
+    print("Full JSON response:")
+    print(json_response)
+    exit(1)
 
-# Process contribution calendar
+# -------------------------------
+# CALCULATE STREAKS
+# -------------------------------
 all_days = []
-for week in data['data']['user']['contributionsCollection']['weeks']:
-    for day in week['contributionDays']:
+for week in weeks:
+    for day in week["contributionDays"]:
         all_days.append({
             "date": datetime.datetime.strptime(day["date"], "%Y-%m-%d").date(),
             "count": day["contributionCount"]
         })
 
-# Calculate streaks
 current_streak, longest_streak, temp_streak = 0, 0, 0
 last_date = None
 streak_start_date, streak_end_date = None, None
@@ -76,7 +105,11 @@ for day in all_days:
 if temp_streak > 0:
     current_streak = temp_streak
 
-# Create SVG
+# -------------------------------
+# CREATE SVG
+# -------------------------------
+print("🎨 Generating SVG...")
+
 dwg = svgwrite.Drawing("assets/github-stats.svg", size=("700px", "250px"))
 
 # Background
