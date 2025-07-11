@@ -49,6 +49,10 @@ user_data = json_response["data"]["user"]
 account_created_at = datetime.datetime.strptime(user_data["createdAt"], "%Y-%m-%dT%H:%M:%SZ").date()
 today = datetime.date.today()
 
+# Format dates in ISO8601 DateTime
+from_date = account_created_at.isoformat() + "T00:00:00Z"
+to_date = today.isoformat() + "T23:59:59Z"
+
 # -------------------------------
 # FETCH ALL-TIME CONTRIBUTIONS
 # -------------------------------
@@ -67,7 +71,7 @@ query_contributions = """
     }
   }
 }
-""" % (USERNAME, account_created_at, today)
+""" % (USERNAME, from_date, to_date)
 
 print("📡 Fetching GitHub contribution data...")
 response = requests.post(
