@@ -6,8 +6,8 @@ import os
 # -------------------------------
 # CONFIGURATION
 # -------------------------------
-USERNAME = "panditpooja"  # your GitHub username
-TOKEN = os.environ.get("GH_TOKEN")  # Token from GitHub Actions secret
+USERNAME = "panditpooja"  # Your GitHub username
+TOKEN = os.environ.get("GH_TOKEN")  # GitHub token from GitHub Actions secret
 
 if not TOKEN:
     print("❌ ERROR: GH_TOKEN is not set as an environment variable.")
@@ -16,15 +16,47 @@ if not TOKEN:
 headers = {"Authorization": f"Bearer {TOKEN}"}
 
 # -------------------------------
-# FETCH GITHUB CONTRIBUTIONS
+# FETCH ACCOUNT CREATED DATE
 # -------------------------------
-query = """
+query_created_at = """
 {
   user(login: "%s") {
     createdAt
-    contributionsCollection {
+  }
+}
+""" % USERNAME
+
+response = requests.post(
+    "https://api.github.com/graphql",
+    json={"query": query_created_at},
+    headers=headers
+)
+
+if response.status_code != 200:
+    print("❌ GitHub API Error (createdAt)")
+    print(f"Status Code: {response.status_code}")
+    print(f"Response: {response.text}")
+    exit(1)
+
+json_response = response.json()
+if "errors" in json_response:
+    print("❌ GraphQL Error (createdAt)")
+    print(json_response["errors"])
+    exit(1)
+
+# Parse account creation date
+user_data = json_response["data"]["user"]
+account_created_at = datetime.datetime.strptime(user_data["createdAt"], "%Y-%m-%dT%H:%M:%SZ").date()
+today = datetime.date.today()
+
+# -------------------------------
+# FETCH ALL-TIME CONTRIBUTIONS
+# -------------------------------
+query_contributions = """
+{
+  user(login: "%s") {
+    contributionsCollection(from: "%s", to: "%s") {
       contributionCalendar {
-        totalContributions
         weeks {
           contributionDays {
             date
@@ -35,55 +67,53 @@ query = """
     }
   }
 }
-""" % USERNAME
+""" % (USERNAME, account_created_at, today)
 
 print("📡 Fetching GitHub contribution data...")
 response = requests.post(
     "https://api.github.com/graphql",
-    json={"query": query},
+    json={"query": query_contributions},
     headers=headers
 )
 
-# -------------------------------
-# DEBUGGING API RESPONSE
-# -------------------------------
 if response.status_code != 200:
-    print("❌ GitHub API Error")
+    print("❌ GitHub API Error (contributions)")
     print(f"Status Code: {response.status_code}")
     print(f"Response: {response.text}")
     exit(1)
 
 json_response = response.json()
 if "errors" in json_response:
-    print("❌ GraphQL Error")
+    print("❌ GraphQL Error (contributions)")
     print(json_response["errors"])
     exit(1)
 
 # -------------------------------
-# PARSE RESPONSE
+# PARSE CONTRIBUTION DATA
 # -------------------------------
 try:
-    user_data = json_response["data"]["user"]
-    total_contributions = user_data["contributionsCollection"]["contributionCalendar"]["totalContributions"]
-    account_created_at = datetime.datetime.strptime(user_data["createdAt"], "%Y-%m-%dT%H:%M:%SZ").date()
-    weeks = user_data["contributionsCollection"]["contributionCalendar"]["weeks"]
+    weeks = json_response["data"]["user"]["contributionsCollection"]["contributionCalendar"]["weeks"]
 except KeyError as e:
     print(f"❌ KeyError: {e}")
     print("Full JSON response:")
     print(json_response)
     exit(1)
 
-# -------------------------------
-# CALCULATE STREAKS
-# -------------------------------
+# Sum total contributions and prepare day list
+total_contributions = 0
 all_days = []
 for week in weeks:
     for day in week["contributionDays"]:
+        count = day["contributionCount"]
+        total_contributions += count
         all_days.append({
             "date": datetime.datetime.strptime(day["date"], "%Y-%m-%d").date(),
-            "count": day["contributionCount"]
+            "count": count
         })
 
+# -------------------------------
+# CALCULATE STREAKS
+# -------------------------------
 current_streak, longest_streak, temp_streak = 0, 0, 0
 last_date = None
 streak_start_date, streak_end_date = None, None
@@ -132,10 +162,8 @@ dwg.add(dwg.text(f"{account_created_at.strftime('%b %d, %Y')} - Present",
                  insert=(116, 180), fill="#999999", font_size="12px", text_anchor="middle"))
 
 # Current Streak Panel
-# Circle
+# Circle only (no flame inside)
 dwg.add(dwg.circle(center=(350, 110), r=40, stroke="#ff9800", stroke_width=5, fill="none"))
-# Flame Icon
-dwg.add(dwg.text("🔥", insert=(338, 100), font_size="20px"))
 # Streak Number
 dwg.add(dwg.text(str(current_streak), insert=(350, 120), fill="#ffffff",
                  font_size="28px", font_weight="bold", text_anchor="middle"))
