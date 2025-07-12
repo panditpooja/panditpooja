@@ -75,6 +75,9 @@ while year_start <= today_utc:
           totalCommitContributions
           totalIssueContributions
           totalPullRequestContributions
+          totalPullRequestReviewContributions
+          totalRepositoryContributions
+          totalDiscussionContributions
           contributionCalendar {
             weeks {
               contributionDays {
