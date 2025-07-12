@@ -208,7 +208,7 @@ dwg.add(dwg.text(f"{account_created_at.strftime('%b %d, %Y')} - Present",
 # Current Streak Panel
 dwg.add(dwg.circle(center=(350, 110), r=40, stroke=accent_color, stroke_width=5, fill="none"))
 dwg.add(dwg.text(str(current_streak), insert=(350, 125), fill=text_color,
-                 font_size="28px", font_weight="bold", text_anchor="middle"))
+                 font_size="38px", font_weight="bold", text_anchor="middle"))
 dwg.add(dwg.text("Current Streak", insert=(350, 170), fill=accent_color,
                  font_size="16px", font_weight="bold", text_anchor="middle"))
 if current_streak_start and current_streak_end:
