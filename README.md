@@ -34,7 +34,7 @@
 
 ---
 <div align="center">
-<img src="https://github.com/panditpooja/panditpooja/blob/main/assets/github-stats.svg">
+<img src="https://github.com/panditpooja/github_stats/blob/main/assets/github-stats.svg">
 </div>
 
 Let's connect and explore opportunities to **drive innovation** and **solve meaningful challenges together**!
