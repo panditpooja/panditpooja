@@ -72,12 +72,6 @@ while year_start <= today_utc:
     {
       user(login: "%s") {
         contributionsCollection(from: "%s", to: "%s") {
-          totalCommitContributions
-          totalIssueContributions
-          totalPullRequestContributions
-          totalPullRequestReviewContributions
-          totalRepositoryContributions
-          totalDiscussionContributions
           contributionCalendar {
             weeks {
               contributionDays {
@@ -109,21 +103,15 @@ while year_start <= today_utc:
         print(json_response["errors"])
         exit(1)
 
-    # Sum commit, issue, and PR contributions only
-    contributions = json_response["data"]["user"]["contributionsCollection"]
-    total_contributions += (
-        contributions["totalCommitContributions"]
-        + contributions["totalIssueContributions"]
-        + contributions["totalPullRequestContributions"]
-    )
-
-    # Parse contribution data for streak calculations
-    weeks = contributions["contributionCalendar"]["weeks"]
+    # Parse contribution data for totals and streak calculations
+    weeks = json_response["data"]["user"]["contributionsCollection"]["contributionCalendar"]["weeks"]
     for week in weeks:
         for day in week["contributionDays"]:
             count = day["contributionCount"]
+            contribution_date = datetime.datetime.strptime(day["date"], "%Y-%m-%d").date()
+            total_contributions += count
             all_days.append({
-                "date": datetime.datetime.strptime(day["date"], "%Y-%m-%d").date(),
+                "date": contribution_date,
                 "count": count
             })
 
