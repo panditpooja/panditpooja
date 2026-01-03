@@ -4,7 +4,7 @@
   <tr>
     <td align="center" width="100%">
       <h3 align="center">Pooja Pandit</h3>
-      <p align="center">🎓 Master’s Student in Information Science (Machine Learning)<br>
+      <p align="center">🎓 Master’s in Information Science (Machine Learning)<br>
       📍 The University of Arizona</p>
       <a href="https://github.com/panditpooja">
         <img src="https://img.shields.io/badge/GitHub-panditpooja-black?style=for-the-badge&logo=github" alt="GitHub Badge"/>
