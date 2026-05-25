@@ -19,7 +19,7 @@
 </div>
 
 # Hello, I'm Pooja Pandit 👋
-## "Empowering Innovation through Data: Computer Engineer | Data Enthusiast | Problem Solver"
+## "Software Engineer | AI Infrastructure & LLM Systems | Ex-ING Bank | Ex-TCS | First-Author IEEE"
 
 ## 💻 Tech Stack
 
