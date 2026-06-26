@@ -19,7 +19,7 @@
 </div>
 
 # Hello, I'm Pooja Pandit 👋
-## "Software Engineer | AI Infrastructure & LLM Systems | Ex-ING Bank | Ex-TCS | First-Author IEEE"
+## "𝐀𝐈 𝐄𝐧𝐠𝐢𝐧𝐞𝐞𝐫 · 𝐒𝐨𝐟𝐭𝐰𝐚𝐫𝐞 𝐄𝐧𝐠𝐢𝐧𝐞𝐞𝐫 | 𝐋𝐋𝐌 𝐈𝐧𝐟𝐫𝐚𝐬𝐭𝐫𝐮𝐜𝐭𝐮𝐫𝐞 · 𝐇𝐞𝐚𝐥𝐭𝐡𝐜𝐚𝐫𝐞 𝐀𝐈 | 𝐄𝐱-𝐓𝐂𝐒 · 𝐈𝐍𝐆 𝐁𝐚𝐧𝐤 𝐀𝐦𝐬𝐭𝐞𝐫𝐝𝐚𝐦 | 𝐅𝐢𝐫𝐬𝐭-𝐀𝐮𝐭𝐡𝐨𝐫 𝐈𝐄𝐄𝐄"
 
 ## 💻 Tech Stack
 
