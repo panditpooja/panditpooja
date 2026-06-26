@@ -104,7 +104,7 @@ RAG-powered medical chatbot grounding LLM responses in retrieved clinical docume
 ## 👩‍💻 About me
 
 - 🏗️ Currently engineering a **HIPAA-aligned multi-agent AI platform** at Avant Recovery — vLLM inference, LangGraph agentic orchestration, pgvector RAG, and 3-VLAN network security for a healthcare nonprofit serving Arizona's underserved populations
-- 🏦 3+ years at **Tata Consultancy Services** shipping production banking portals for **ING Bank Amsterdam** — 12,000+ concurrent users, 99.9% uptime. Invited for a 4-month onsite engagement in Amsterdam.
+- 🏦 3+ years at **Tata Consultancy Services** shipping production banking portals for **ING Bank Amsterdam** — 12,000+ concurrent users, 99.9% uptime. 
 - 📄 **IEEE First Author** — OntoNexus @ MODELS 2025 (published); INCOSE IS 2026 (accepted)
 - 🏆 Gold Medalist, B.E. Computer Engineering, University of Mumbai
 - ⚡ Interesting fact: My former clients extended an invitation for me to join them at their onsite office in Amsterdam, Netherlands. I traveled from Mumbai to Amsterdam to enhance my skills and collaborate directly with clients — strengthening relationships and gaining hands-on experience in a dynamic international environment. 🌍✈️
