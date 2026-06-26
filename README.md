@@ -38,13 +38,13 @@
 
 ## 🚀 Featured Projects
 
-### 🧠 [LangGraph Financial Assistant](https://github.com/panditpooja/YOUR-REPO)
-Multi-agent financial Q&A — supervisor routing 3 domain mini-agents with loop prevention and Prometheus observability.  
+### 🧠 [Multi-Agent Financial Analysis System — LangGraph](https://github.com/panditpooja/multi-agent-financial-analysis-system-using-langgraph)
+Supervisor agent routing 3 domain-specialized mini-agents for financial Q&A — with context engineering, loop prevention, and Prometheus observability.  
 `LangGraph` `Python` `Prometheus` `Agentic AI`
 
-### 🌿 [GenAI Medical Chatbot — Biosphere 2 Digital Twin](https://github.com/panditpooja/YOUR-REPO)
-RAG chatbot over Biosphere 2 sensor data streams. Kafka ingestion → Spark processing → LLM-grounded responses. Deployed on AWS.  
-`Apache Kafka` `Apache Spark` `RAG` `LangChain` `AWS`
+### 🏥 [GenAI Medical Chatbot — LLM + LangChain + Pinecone + AWS](https://github.com/panditpooja/genAI-medical-chatbot-with-LLM-LangChain-PineconeVectDb-Flask-AWS)
+RAG-powered medical chatbot grounding LLM responses in retrieved clinical documents. Pinecone vector search, Flask API, deployed on AWS.  
+`LangChain` `Pinecone` `RAG` `Flask` `AWS` `Python`
 
 ---
 
@@ -107,6 +107,7 @@ RAG chatbot over Biosphere 2 sensor data streams. Kafka ingestion → Spark proc
 - 🏦 3+ years at **Tata Consultancy Services** shipping production banking portals for **ING Bank Amsterdam** — 12,000+ concurrent users, 99.9% uptime. Invited for a 4-month onsite engagement in Amsterdam.
 - 📄 **IEEE First Author** — OntoNexus @ MODELS 2025 (published); INCOSE IS 2026 (accepted)
 - 🏆 Gold Medalist, B.E. Computer Engineering, University of Mumbai
+- ⚡ Interesting fact: My former clients extended an invitation for me to join them at their onsite office in Amsterdam, Netherlands. I traveled from Mumbai to Amsterdam to enhance my skills and collaborate directly with clients — strengthening relationships and gaining hands-on experience in a dynamic international environment. 🌍✈️
 - 💞️ Open to collaborating on: production RAG pipelines, LLM inference optimization, HIPAA-aligned AI infrastructure, full-stack AI applications
 - 😄 She/Her
 - 📫 Reach me: [LinkedIn](https://www.linkedin.com/in/pooja-pandit-177978135/) · [Portfolio](https://poojapandit.pythonanywhere.com) · [Topmate](https://topmate.io/pooja_pandit)
