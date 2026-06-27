@@ -7,13 +7,13 @@
       <p align="center">🎓 M.S. Information Science (Machine Learning) · GPA 4.0 · University of Arizona<br>
       📄 IEEE First Author &nbsp;|&nbsp; 🏆 Gold Medalist in B.E. Computer Engineering</p>
       <a href="https://github.com/panditpooja">
-        <img src="https://img.shields.io/badge/GitHub-panditpooja-black?style=for-the-badge&logo=github" alt="GitHub Badge"/>
+        <img src="https://img.shields.io/badge/-GitHub-181717?style=for-the-badge&logo=github&logoColor=white" alt="GitHub"/>
       </a>
       <a href="https://www.linkedin.com/in/pooja-pandit-177978135/">
-        <img src="https://img.shields.io/badge/LinkedIn-pooja--pandit-blue?style=for-the-badge&logo=linkedin" alt="LinkedIn Badge"/>
+        <img src="https://img.shields.io/badge/in-LinkedIn-0A66C2?style=for-the-badge&labelColor=0A66C2" alt="LinkedIn"/>
       </a>
       <a href="https://poojapandit.pythonanywhere.com">
-        <img src="https://img.shields.io/badge/Portfolio-poojapandit-green?style=for-the-badge&logo=firefox" alt="Portfolio Badge"/>
+        <img src="https://img.shields.io/badge/-Portfolio-4CAF50?style=for-the-badge&logo=firefox&logoColor=white" alt="Portfolio"/>
       </a>
     </td>
   </tr>
