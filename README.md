@@ -102,7 +102,7 @@ RAG-powered medical chatbot grounding LLM responses in retrieved clinical docume
 - 🏦 **3+ years** at **Tata Consultancy Services** shipping production banking portals for **ING Bank Amsterdam** — 12,000+ concurrent users, 99.9% uptime.
 - 👩‍🏫 Mentored **380+ students** across 3 STEM programs (Swadha Foundation · vLookup · OLAY) on software engineering and data science career pathways
 - 📄 **IEEE First Author** — OntoNexus @ MODELS 2025 (published); INCOSE IS 2026 (accepted).
-- 🏆 Distinguished Graduate Scholar, University of Arizona · Gold Medalist, B.E. Computer Engineering, University of Mumbai.
+- 🏆 **Distinguished Graduate Scholar**, University of Arizona · Gold Medalist, B.E. Computer Engineering, University of Mumbai.
 - ⚡ Interesting fact: My former clients extended an invitation for me to join them at their onsite office in Amsterdam, Netherlands. I traveled from Mumbai to Amsterdam to enhance my skills and collaborate directly with clients — strengthening relationships and gaining hands-on experience in a dynamic international environment. 🌍✈️
 - 💞️ Open to collaborating on: production RAG pipelines, LLM inference optimization, HIPAA-aligned AI infrastructure, full-stack AI applications
 - 😄 She/Her
