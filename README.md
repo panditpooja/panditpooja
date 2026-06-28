@@ -4,7 +4,7 @@
     <td align="center" width="100%">
       <h3 align="center">Pooja Diwakar Pandit</h3>
       <p align="center">🎓 M.S. Information Science (Machine Learning) · GPA 4.0 · University of Arizona<br>
-      📄 IEEE First Author &nbsp;|&nbsp; 🏆 Gold Medalist in B.E. Computer Engineering</p>
+      📄 IEEE First Author &nbsp;|&nbsp;  🌟 Graduate Scholar (UArizona) &nbsp;|&nbsp; 🏆 Gold Medalist in B.E. Computer Engineering</p>
     </td>
   </tr>
 </table>
@@ -97,10 +97,12 @@ RAG-powered medical chatbot grounding LLM responses in retrieved clinical docume
 
 ## 👩‍💻 About me
 
-- 🏗️ Currently engineering a **HIPAA-aligned multi-agent AI platform** at Avant Recovery — vLLM inference, LangGraph agentic orchestration, pgvector RAG, and 3-VLAN network security for a healthcare nonprofit serving Arizona's underserved populations
-- 🏦 3+ years at **Tata Consultancy Services** shipping production banking portals for **ING Bank Amsterdam** — 12,000+ concurrent users, 99.9% uptime. 
-- 📄 **IEEE First Author** — OntoNexus @ MODELS 2025 (published); INCOSE IS 2026 (accepted)
-- 🏆 Gold Medalist, B.E. Computer Engineering, University of Mumbai
+- 🏗️ Currently engineering a **HIPAA-aligned multi-agent AI platform** at Avant Recovery — vLLM inference, LangGraph agentic orchestration, pgvector RAG, and 3-VLAN network security for a healthcare nonprofit serving Arizona's underserved populations.
+- 🤖 **2+ years building GenAI systems** — RAG pipelines, multi-agent LLM orchestration, and production AI infrastructure across healthcare and environmental research domains.
+- 🏦 3+ years at **Tata Consultancy Services** shipping production banking portals for **ING Bank Amsterdam** — 12,000+ concurrent users, 99.9% uptime.
+- 👩‍🏫 Mentored **380+ students** across 3 STEM programs (Swadha Foundation · vLookup · OLAY) on software engineering and data science career pathways
+- 📄 **IEEE First Author** — OntoNexus @ MODELS 2025 (published); INCOSE IS 2026 (accepted).
+- 🏆 Distinguished Graduate Scholar, University of Arizona · Gold Medalist, B.E. Computer Engineering, University of Mumbai.
 - ⚡ Interesting fact: My former clients extended an invitation for me to join them at their onsite office in Amsterdam, Netherlands. I traveled from Mumbai to Amsterdam to enhance my skills and collaborate directly with clients — strengthening relationships and gaining hands-on experience in a dynamic international environment. 🌍✈️
 - 💞️ Open to collaborating on: production RAG pipelines, LLM inference optimization, HIPAA-aligned AI infrastructure, full-stack AI applications
 - 😄 She/Her
