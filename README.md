@@ -11,7 +11,7 @@
 
 [![GitHub](https://img.shields.io/badge/-GitHub-181717?style=for-the-badge&logo=github&logoColor=white)](https://github.com/panditpooja)
 [![LinkedIn](https://img.shields.io/badge/in-LinkedIn-0A66C2?style=for-the-badge)](https://www.linkedin.com/in/pooja-pandit-177978135/)
-[![Portfolio](https://img.shields.io/badge/-Portfolio-4CAF50?style=for-the-badge&logo=firefox&logoColor=white)](https://poojapandit.pythonanywhere.com)
+[![Portfolio](https://img.shields.io/badge/-Portfolio-4CAF50?style=for-the-badge&logo=firefox&logoColor=white)](https://poojapandit.netlify.app/)
 
 </div>
 
@@ -106,7 +106,7 @@ RAG-powered medical chatbot grounding LLM responses in retrieved clinical docume
 - ⚡ Interesting fact: My former clients extended an invitation for me to join them at their onsite office in Amsterdam, Netherlands. I traveled from Mumbai to Amsterdam to enhance my skills and collaborate directly with clients — strengthening relationships and gaining hands-on experience in a dynamic international environment. 🌍✈️
 - 💞️ Open to collaborating on: production RAG pipelines, LLM inference optimization, HIPAA-aligned AI infrastructure, full-stack AI applications
 - 😄 She/Her
-- 📫 Reach me: [LinkedIn](https://www.linkedin.com/in/pooja-pandit-177978135/) · [Portfolio](https://poojapandit.pythonanywhere.com) · [Topmate](https://topmate.io/pooja_pandit)
+- 📫 Reach me: [LinkedIn](https://www.linkedin.com/in/pooja-pandit-177978135/) · [Portfolio](https://poojapandit.netlify.app/) · [Topmate](https://topmate.io/pooja_pandit)
 
 ---
 
