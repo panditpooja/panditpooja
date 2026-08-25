@@ -23,8 +23,8 @@
 ## 🔧 What I'm building right now
 
 - 🤖 **Agentic AI** — LangGraph multi-agent systems with supervisor routing, context engineering, loop prevention, and Prometheus observability
-- 🔍 **RAG pipelines** — pgvector retrieval with IBM Granite R2 embeddings, OCR ingest, and hallucination-safety layers across a 4-VM on-premise stack
-- ⚡ **LLM inference** — vLLM serving with GPU passthrough (PCIe/vfio-pci), dual quantized model deployment on Proxmox VMs
+- 🔍 **RAG pipelines** — pgvector retrieval with production-grade embedding models, OCR ingest, and hallucination-safety layers across an on-premise, air-gapped stack
+- ⚡ **LLM inference** — self-hosted model serving with GPU passthrough, concurrent quantized model deployment across a virtualized on-prem environment.
 - 🔒 **HIPAA-aligned infrastructure** — full-disk LUKS encryption, pgAudit, row-level security per AI agent role, 4-VLAN network segmentation
 - 🖥️ **Full-stack delivery** — TypeScript/React audit dashboards + Python/Node.js backend APIs
 
@@ -97,7 +97,7 @@ RAG-powered medical chatbot grounding LLM responses in retrieved clinical docume
 
 ## 👩‍💻 About me
 
-- 🏗️ Currently engineering a **HIPAA-aligned multi-agent AI platform** at Avant Recovery — vLLM inference, LangGraph agentic orchestration, multi-format pgvector RAG, and 4-VLAN network security for a peer support recovery organization serving Arizona's underserved populations.
+- 🏗️ Currently engineering a **HIPAA-aligned multi-agent AI platform** at Avant Recovery — self-hosted LLM inference, LangGraph agentic orchestration, multi-format pgvector RAG, and VLAN-segmented network security for a peer support recovery organization serving Arizona's underserved populations.
 - 🤖 **2+ years building GenAI systems** — RAG pipelines, multi-agent LLM orchestration, and production AI infrastructure across healthcare and environmental research domains.
 - 🏦 **3+ years** at **Tata Consultancy Services** shipping production banking portals for **ING Bank Amsterdam** — 12,000+ concurrent users, 99.9% uptime.
 - 👩‍🏫 Mentored **380+ students** across 3 STEM programs (Swadha Foundation · vLookup · OLAY) on software engineering and data science career pathways
