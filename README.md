@@ -47,7 +47,6 @@ RAG-powered medical chatbot grounding LLM responses in retrieved clinical docume
 ### 🤖 AI/ML & LLM Engineering
 ![LangChain](https://img.shields.io/badge/LangChain-1C3C3C?style=for-the-badge&logo=langchain&logoColor=white)
 ![LangGraph](https://img.shields.io/badge/LangGraph-Agentic_AI-6B21A8?style=for-the-badge)
-![vLLM](https://img.shields.io/badge/vLLM-LLM_Serving-FF6B6B?style=for-the-badge)
 ![RAG](https://img.shields.io/badge/RAG-Retrieval_Augmented-0EA5E9?style=for-the-badge)
 ![pgvector](https://img.shields.io/badge/pgvector-Vector_Search-316192?style=for-the-badge&logo=postgresql&logoColor=white)
 ![PyTorch](https://img.shields.io/badge/PyTorch-%23EE4C2C.svg?style=for-the-badge&logo=PyTorch&logoColor=white)
